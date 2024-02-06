@@ -3,12 +3,22 @@ package routes
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"example.com/rest-api/models"
 	"example.com/rest-api/utils"
+	"github.com/gin-gonic/gin"
 )
-
-
+//  Signup creates a new user
+//
+//	@Summary		Create new user
+//	@Description		Create a new service user
+//	@Id			CreateUser
+//	@Tags			Users
+//	@Accept			json
+//	@Produce		json
+//	@Param			user	body		models.UserExample		true	"User to create"
+//	@Success		201	{object}	models.UserCreated 			"User is created successfully"
+//	@Failure		500	{object}	models.UserCreatedUnsuccessful 		"User Already existing"
+//	@Router			/signup [post]
 func Signup(context *gin.Context) {
 	var user models.User
 
@@ -28,7 +38,18 @@ func Signup(context *gin.Context) {
 
 	context.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
 }
-
+// Login user and get JWT tokens
+//
+//	@Summary		Login
+//	@Description		Login to get JWT token
+//	@Id			Login
+//	@Tags			Users
+//	@Accept			json
+//	@Produce		json
+//	@Param			user		body		models.UserExample	true	"Login credentials"
+//	@Success		200		{object}	models.UserLogin		"Successful login response"
+//	@Failure		401		{object}	models.UserLoginUnsuccessful	"Unsuccessful login response"
+//	@Router			/login [post]
 func Login(context *gin.Context) {
 	var user models.User
 
